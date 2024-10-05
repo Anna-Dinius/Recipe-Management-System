@@ -13,8 +13,8 @@ $recipes = json_decode($content, true);
 <head>
 	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
 		crossorigin="anonymous"></script>
-	<script type="module" src="./js/index.js"></script>
-	<script type="module" src="./js/modal.js"></script>
+	<!-- <script type="module" src="./js/index.js"></script> -->
+	<script type="module" src="./js/form.js"></script>
 
 	<title>Recipes</title>
 	<meta charset="UTF-8" />
@@ -58,7 +58,7 @@ $recipes = json_decode($content, true);
 				</a>
 			</div>
 
-			<div id="filter">
+			<!-- <div id="filter">
 				<p>Filter Results By: </p>
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
@@ -73,8 +73,7 @@ $recipes = json_decode($content, true);
 						<button class="dropdown-item" type="button" data-id="dessert">Desserts</button>
 					</div>
 				</div>
-			</div>
-
+			</div> -->
 		</div>
 
 		<div id="content">

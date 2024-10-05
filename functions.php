@@ -12,7 +12,7 @@ function getRecipe($recipes, $id)
   return null;
 }
 
-function updateView($target_id)
+function updateViewCount($target_id)
 {
   if (file_exists('visitors.csv')) {
     $lines = file('visitors.csv');
@@ -50,31 +50,163 @@ function updateView($target_id)
   }
 }
 
-function generateServingSizes()
+function generateServingSizes($action, $recipe)
 {
-  for ($i = 0; $i <= 20; $i++) {
+  $largestServing = 20;
+
+  if ($action == 'create') {
+    for ($i = 0; $i <= $largestServing; $i++) {
+      ?>
+      <option value="<?= $i ?>"><?= $i ?></option>
+      <?php
+    }
+  }
+
+  if ($action == 'edit') {
+    for ($i = 0; $i <= $largestServing; $i++) {
+      if ($i == $recipe['servings']) {
+        ?>
+        <option value="<?= $i ?>" selected><?= $i ?></option>
+        <?php
+      } else {
+        ?>
+        <option value="<?= $i ?>"><?= $i ?></option>
+        <?php
+      }
+    }
+  }
+}
+
+
+
+function generateHours($action, $type, $recipe)
+{
+  $maxHours = 24;
+
+  if ($action == 'create') {
+    for ($i = 0; $i <= $maxHours; $i++) {
+      ?>
+      <option value="<?= $i ?>"><?= $i ?></option>
+      <?php
+    }
+  }
+
+  if ($action == 'edit') {
+    if ($type == 'prep') {
+      for ($i = 0; $i <= $maxHours; $i++) {
+        if ($i == $recipe['prep_time_hours']) {
+          ?>
+          <option value="<?= $i ?>" selected><?= $i ?></option>
+          <?php
+        } else {
+          ?>
+          <option value="<?= $i ?>"><?= $i ?></option>
+          <?php
+        }
+      }
+    }
+
+    if ($type == 'cook') {
+      for ($i = 0; $i <= $maxHours; $i++) {
+        if ($i == $recipe['cook_time_hours']) {
+          ?>
+          <option value="<?= $i ?>" selected><?= $i ?></option>
+          <?php
+        } else {
+          ?>
+          <option value="<?= $i ?>"><?= $i ?></option>
+          <?php
+        }
+      }
+    }
+
+  }
+
+
+}
+
+function generateMinutes($action, $type, $recipe)
+{
+  $maxMinutes = 60;
+
+  if ($action == 'create') {
+    for ($i = 0; $i < $maxMinutes; $i += 5) {
+      ?>
+      <option value="<?= $i ?>"><?= $i ?></option>
+      <?php
+    }
+  }
+
+  if ($action == 'edit') {
+    if ($type == 'prep') {
+      for ($i = 0; $i < $maxMinutes; $i += 5) {
+        if ($i == $recipe['prep_time_minutes']) {
+          ?>
+          <option value="<?= $i ?>" selected><?= $i ?></option>
+          <?php
+        } else {
+          ?>
+          <option value="<?= $i ?>"><?= $i ?></option>
+          <?php
+        }
+      }
+    }
+
+    if ($type == 'cook') {
+      for ($i = 0; $i < $maxMinutes; $i += 5) {
+        if ($i == $recipe['cook_time_minutes']) {
+          ?>
+          <option value="<?= $i ?>" selected><?= $i ?></option>
+          <?php
+        } else {
+          ?>
+          <option value="<?= $i ?>"><?= $i ?></option>
+          <?php
+        }
+      }
+    }
+
+  }
+
+}
+
+function generateSteps($recipe)
+{
+  for ($i = 0; $i < count($recipe['steps']); $i++) {
     ?>
-    <option value="<?= $i ?>"><?= $i ?></option>
+    <div class="d-flex">
+      <textarea class="form-control mb-3 step-input" id="step-<?= $i + 1 ?>"><?= $recipe['steps'][$i] ?></textarea>
+      <button class="btn btn-danger del-input">X</button>
+    </div>
+    <?php
+  }
+}
+function generateIngredients($recipe)
+{
+  for ($i = 0; $i < count($recipe['ingredients']); $i++) {
+    ?>
+    <div class="d-flex">
+      <input class="form-control mb-3 ingredient-input" id="ingredient-<?= $i + 1 ?>"
+        value="<?= $recipe['ingredients'][$i] ?>" />
+      <button class="btn btn-danger del-input">X</button>
+    </div>
     <?php
   }
 }
 
-function generateHours()
+function generateCategory($recipe)
 {
+  $categories = ['Entrees', 'Sides', 'Desserts'];
 
-}
-
-function generateMinutes()
-{
-  for ($i = 0; $i <= 5; $i++) {
-    ?>
-    <option value="<?= $i ?>"><?= $i ?></option>
-    <?php
-  }
-
-  for ($i = 10; $i < 60; $i + 5) {
-    ?>
-    <option value="<?= $i ?>"><?= $i ?></option>
-    <?php
+  foreach ($categories as $category) {
+    if ($recipe['category'] == $category) {
+      ?>
+      <option value="<?= $category ?>" selected><?= $category ?></option>
+      <?php
+    } else {
+      ?>
+      <option value="<?= $category ?>"><?= $category ?></option>
+      <?php
+    }
   }
 }

@@ -8,7 +8,7 @@ $recipes = json_decode($content, true);
 $id = $_GET['recipe_id'];
 $recipe = getRecipe($recipes, $id);
 
-updateView($id);
+updateViewCount($id);
 
 ?>
 
@@ -18,9 +18,7 @@ updateView($id);
 <head>
 	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
 		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<script src="./js/detail.js"></script>
-	<script type="module" src="./js/modal.js"></script>
+	<script type="module" src="./js/form.js"></script>
 
 	<title>Recipe Details</title>
 	<meta charset="UTF-8" />
@@ -184,11 +182,11 @@ updateView($id);
 									</div>
 									<div class="time_options">
 										<select name="prep_time_hours" class="time_hrs prep_time" id="prep_time_hrs">
-											<!--filled in index.js-->
+
 										</select>
 										<br>
 										<select name="prep_time_minutes" class="time_mins prep_time" id="prep_time_mins">
-											<!--filled in index.js-->
+
 										</select>
 									</div>
 								</div>
@@ -203,11 +201,11 @@ updateView($id);
 									</div>
 									<div class="time_options">
 										<select name="cook_time_hours" class="time_hrs cook_time" id="cook_time_hrs">
-											<!--filled in index.js-->
+
 										</select>
 										<br>
 										<select name="cook_time_minutes" class="time_mins cook_time" id="cook_time_mins">
-											<!--filled in index.js-->
+
 										</select>
 									</div>
 								</div>
@@ -220,7 +218,7 @@ updateView($id);
 									<strong>Servings: </strong>
 									<span class="required">*</span>
 									<select name="servings" id="servingSizes">
-										<!--filled in index.js-->
+
 									</select>
 								</p>
 								<p>

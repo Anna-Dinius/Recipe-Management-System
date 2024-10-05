@@ -5,10 +5,8 @@ $file = 'data/recipes.json';
 $content = file_get_contents($file);
 $recipes = json_decode($content, true);
 
-// $id = $_GET['recipe_id'];
-// $recipe = getRecipe($recipes, $id);
-
-// updateView($id);
+$action = 'create';
+$recipe = null;
 
 ?>
 
@@ -18,11 +16,9 @@ $recipes = json_decode($content, true);
 <head>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="./js/detail.js"></script>
-  <script type="module" src="./js/modal.js"></script>
+  <script type="module" src="./js/form.js"></script>
 
-  <title>Recipe Details</title>
+  <title>Create a Recipe</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
@@ -78,14 +74,16 @@ $recipes = json_decode($content, true);
         <form onsubmit="return false;" id="change-form">
 
           <p>
-            <strong>Name: </strong>
+            <strong>Recipe Name: </strong>
             <span class="required">*</span>
             <input type="text" class="form-control" name="name" id="recipe-name" />
           </p>
+
           <p>
             <strong>Author: </strong>
             <input type="text" class="form-control" name="author" id="m-authorName" disabled />
           </p>
+
           <p>
             <strong>Category: &nbsp;&nbsp;</strong>
             <select name="category" id="m-category">
@@ -94,6 +92,7 @@ $recipes = json_decode($content, true);
               <option value="Desserts">Desserts</option>
             </select>
           </p>
+
           <p class="prep_cook_time">
             <strong>Prep Time: </strong>
             <span class="required">*</span>
@@ -105,17 +104,20 @@ $recipes = json_decode($content, true);
             </div>
             <div class="time_options">
               <select name="prep_time_hours" class="time_hrs prep_time" id="prep_time_hrs">
-
+                <?php
+                generateHours($action, $recipe);
+                ?>
               </select>
               <br>
               <select name="prep_time_minutes" class="time_mins prep_time" id="prep_time_mins">
                 <?php
-                generateMinutes();
+                generateMinutes($action, $recipe);
                 ?>
               </select>
             </div>
           </div>
           </p>
+
           <p class="prep_cook_time">
             <strong>Cook Time: </strong>
           <div style="display:flex">
@@ -126,38 +128,46 @@ $recipes = json_decode($content, true);
             </div>
             <div class="time_options">
               <select name="cook_time_hours" class="time_hrs cook_time" id="cook_time_hrs">
-
+                <?php
+                generateHours($action, $recipe);
+                ?>
               </select>
               <br>
               <select name="cook_time_minutes" class="time_mins cook_time" id="cook_time_mins">
-
+                <?php
+                generateMinutes($action, $recipe);
+                ?>
               </select>
             </div>
           </div>
+
           </p>
           <p>
             <strong>Total Time: &nbsp;&nbsp;</strong><input type="text" class="form-control" name="total_time"
               id="m-total-time" disabled />
           </p>
+
           <p>
             <strong>Servings: </strong>
             <span class="required">*</span>
             <select name="servings" id="servingSizes">
               <?php
-              generateServingSizes();
+              generateServingSizes($action, $recipe);
               ?>
             </select>
           </p>
+
           <p>
             <strong>Image: &nbsp;&nbsp;</strong><input class="form-control" name="image" />
           </p>
-          <p>
 
+          <p>
             <strong>Ingredients: </strong>
             <span class="required">*</span>
           <div id="m-ingredients"></div>
           <button id="add-ingredient" class="btn btn-secondary">Add Ingredient</button>
           </p>
+
           <p>
             <strong>Steps: </strong>
             <span class="required">*</span>
