@@ -42,12 +42,7 @@ updateViewCount($id);
 		<div class="container-fluid">
 			<a class="navbar-brand text-light" href="index.php">SavorySagas</a>
 
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-				aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div id="navbarNavAltMarkup">
 				<div class="navbar-nav">
 					<a class="nav-link" href="signin.php" id="signinBtn">Sign in</a>
 					<a class="nav-link" href="signup.php" id="signupBtn">Sign up</a>
@@ -136,117 +131,6 @@ updateViewCount($id);
 							}
 							?>
 						</ol>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Modal -->
-		<div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="modify-title"></h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-
-					<div class="modal-body">
-						<div id="modify-area">
-							<!-- prevents submissions -->
-							<form onsubmit="return false;" id="change-form">
-
-								<p>
-									<strong>Name: </strong>
-									<span class="required">*</span>
-									<input type="text" class="form-control" name="name" id="recipe-name" />
-								</p>
-								<p>
-									<strong>Author: </strong>
-									<input type="text" class="form-control" name="author" id="m-authorName" disabled />
-								</p>
-								<p>
-									<strong>Category: &nbsp;&nbsp;</strong>
-									<select name="category" id="m-category">
-										<option value="Entrees">Entrees</option>
-										<option value="Sides">Sides</option>
-										<option value="Desserts">Desserts</option>
-									</select>
-								</p>
-								<p class="prep_cook_time">
-									<strong>Prep Time: </strong>
-									<span class="required">*</span>
-								<div style="display:flex">
-									<div>
-										&nbsp;&nbsp;Hours:&nbsp;&nbsp;
-										<br>
-										&nbsp;&nbsp;Minutes:&nbsp;&nbsp;
-									</div>
-									<div class="time_options">
-										<select name="prep_time_hours" class="time_hrs prep_time" id="prep_time_hrs">
-
-										</select>
-										<br>
-										<select name="prep_time_minutes" class="time_mins prep_time" id="prep_time_mins">
-
-										</select>
-									</div>
-								</div>
-								</p>
-								<p class="prep_cook_time">
-									<strong>Cook Time: </strong>
-								<div style="display:flex">
-									<div>
-										&nbsp;&nbsp;Hours:&nbsp;&nbsp;
-										<br>
-										&nbsp;&nbsp;Minutes:&nbsp;&nbsp;
-									</div>
-									<div class="time_options">
-										<select name="cook_time_hours" class="time_hrs cook_time" id="cook_time_hrs">
-
-										</select>
-										<br>
-										<select name="cook_time_minutes" class="time_mins cook_time" id="cook_time_mins">
-
-										</select>
-									</div>
-								</div>
-								</p>
-								<p>
-									<strong>Total Time: &nbsp;&nbsp;</strong><input type="text" class="form-control" name="total_time"
-										id="m-total-time" disabled />
-								</p>
-								<p>
-									<strong>Servings: </strong>
-									<span class="required">*</span>
-									<select name="servings" id="servingSizes">
-
-									</select>
-								</p>
-								<p>
-									<strong>Image URL: &nbsp;&nbsp;</strong><input class="form-control" name="image" />
-								</p>
-								<p>
-
-									<strong>Ingredients: </strong>
-									<span class="required">*</span>
-								<div id="m-ingredients"></div>
-								<button id="add-ingredient" class="btn btn-secondary">Add Ingredient</button>
-								</p>
-								<p>
-									<strong>Steps: </strong>
-									<span class="required">*</span>
-								<div id="m-steps"></div>
-								<button id="add-step" class="btn btn-secondary">Add Step</button>
-								</p>
-							</form>
-						</div>
-					</div>
-					<div class="modal-footer" id="modalButton">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancel">
-							Cancel
-						</button>
-						<button type="button" class="btn btn-primary" id="save-changes-btn">
-							Save
-						</button>
 					</div>
 				</div>
 			</div>

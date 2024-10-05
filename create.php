@@ -40,12 +40,7 @@ $recipe = null;
     <div class="container-fluid">
       <a class="navbar-brand text-light" href="index.php">SavorySagas</a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link" href="signin.php" id="signinBtn">Sign in</a>
           <a class="nav-link" href="signup.php" id="signupBtn">Sign up</a>

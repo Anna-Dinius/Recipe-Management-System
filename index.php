@@ -13,7 +13,6 @@ $recipes = json_decode($content, true);
 <head>
 	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
 		crossorigin="anonymous"></script>
-	<!-- <script type="module" src="./js/index.js"></script> -->
 	<script type="module" src="./js/form.js"></script>
 
 	<title>Recipes</title>
@@ -37,11 +36,8 @@ $recipes = json_decode($content, true);
 	<nav class="navbar navbar-expand-lg navbar-light mb-2 turqoise">
 		<div class="container-fluid">
 			<a class="navbar-brand text-light" href="index.php">SavorySagas</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-				aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+			<div id="navbarNavAltMarkup">
 				<div class="navbar-nav">
 					<a class="nav-link" href="signin.php" id="signinBtn">Sign in</a>
 					<a class="nav-link" href="signup.php" id="signupBtn">Sign up</a>
@@ -57,55 +53,13 @@ $recipes = json_decode($content, true);
 					Create
 				</a>
 			</div>
-
-			<!-- <div id="filter">
-				<p>Filter Results By: </p>
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">
-						All
-					</button>
-
-					<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-						<button class="dropdown-item" type="button" data-id="all">All</button>
-						<button class="dropdown-item" type="button" data-id="entree">Entrees</button>
-						<button class="dropdown-item" type="button" data-id="Side Dish">Sides</button>
-						<button class="dropdown-item" type="button" data-id="dessert">Desserts</button>
-					</div>
-				</div>
-			</div> -->
 		</div>
 
 		<div id="content">
 			<?php
-			for ($i = 0; $i < count($recipes); $i++) {
-				?>
-				<div class="card">
-					<a href="detail.php?recipe_id=<?= $recipes[$i]['id'] ?>">
-						<div class="img-div">
-							<img src="<?= $recipes[$i]['image'] ?>">
-						</div>
-
-						<div class="h1-div">
-							<h1 class="text-truncate"><?= $recipes[$i]['name'] ?></h1>
-						</div>
-
-						<p class="author">Author: <?= $recipes[$i]['author'] ?></p>
-					</a>
-
-					<div class="d-flex btns" id="btn-box-<?= $recipes[$i]['id'] ?>">
-						<a href="delete.php?recipe_id=<?= $recipes[$i]['id'] ?>" class="btn btn-sm btn-danger btn-delete">Delete</a>
-						<a href="edit.php?recipe_id=<?= $recipes[$i]['id'] ?>" class="btn btn-secondary update-btn">Edit</a>
-					</div>
-				</div>
-				<?php
-			}
+			displayCards($recipes);
 			?>
 		</div>
-
-		<!-- <div id="loadmore" class="btn-container">
-			<button class="btn load-btn btn-primary" id="load-more">Load More</button>
-		</div> -->
 	</main>
 </body>
 

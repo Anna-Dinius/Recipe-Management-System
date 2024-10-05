@@ -50,6 +50,32 @@ function updateViewCount($target_id)
   }
 }
 
+function displayCards($recipes)
+{
+  for ($i = 0; $i < count($recipes); $i++) {
+    ?>
+    <div class="card">
+      <a href="detail.php?recipe_id=<?= $recipes[$i]['id'] ?>">
+        <div class="img-div">
+          <img src="<?= $recipes[$i]['image'] ?>">
+        </div>
+
+        <div class="h1-div">
+          <h1 class="text-truncate"><?= $recipes[$i]['name'] ?></h1>
+        </div>
+
+        <p class="author">Author: <?= $recipes[$i]['author'] ?></p>
+      </a>
+
+      <div class="d-flex btns" id="btn-box-<?= $recipes[$i]['id'] ?>">
+        <a href="delete.php?recipe_id=<?= $recipes[$i]['id'] ?>" class="btn btn-sm btn-danger btn-delete">Delete</a>
+        <a href="edit.php?recipe_id=<?= $recipes[$i]['id'] ?>" class="btn btn-secondary update-btn">Edit</a>
+      </div>
+    </div>
+    <?php
+  }
+}
+
 function generateServingSizes($action, $recipe)
 {
   $largestServing = 20;
@@ -77,70 +103,41 @@ function generateServingSizes($action, $recipe)
   }
 }
 
-
-
-function generateHours($action, $type, $recipe)
+function generateTimeOptions($action, $type, $time, $recipe)
 {
   $maxHours = 24;
-
-  if ($action == 'create') {
-    for ($i = 0; $i <= $maxHours; $i++) {
-      ?>
-      <option value="<?= $i ?>"><?= $i ?></option>
-      <?php
-    }
-  }
-
-  if ($action == 'edit') {
-    if ($type == 'prep') {
-      for ($i = 0; $i <= $maxHours; $i++) {
-        if ($i == $recipe['prep_time_hours']) {
-          ?>
-          <option value="<?= $i ?>" selected><?= $i ?></option>
-          <?php
-        } else {
-          ?>
-          <option value="<?= $i ?>"><?= $i ?></option>
-          <?php
-        }
-      }
-    }
-
-    if ($type == 'cook') {
-      for ($i = 0; $i <= $maxHours; $i++) {
-        if ($i == $recipe['cook_time_hours']) {
-          ?>
-          <option value="<?= $i ?>" selected><?= $i ?></option>
-          <?php
-        } else {
-          ?>
-          <option value="<?= $i ?>"><?= $i ?></option>
-          <?php
-        }
-      }
-    }
-
-  }
-
-
-}
-
-function generateMinutes($action, $type, $recipe)
-{
   $maxMinutes = 60;
 
   if ($action == 'create') {
-    for ($i = 0; $i < $maxMinutes; $i += 5) {
-      ?>
-      <option value="<?= $i ?>"><?= $i ?></option>
-      <?php
-    }
-  }
-
-  if ($action == 'edit') {
-    if ($type == 'prep') {
+    if ($time == 'hours') {
+      for ($i = 0; $i <= $maxHours; $i++) {
+        ?>
+        <option value="<?= $i ?>"><?= $i ?></option>
+        <?php
+      }
+    } elseif ($time == 'minutes') {
       for ($i = 0; $i < $maxMinutes; $i += 5) {
-        if ($i == $recipe['prep_time_minutes']) {
+        ?>
+        <option value="<?= $i ?>"><?= $i ?></option>
+        <?php
+      }
+    }
+  } elseif ($action == 'edit') {
+    if ($time == 'hours') {
+      for ($i = 0; $i <= $maxHours; $i++) {
+        if ($i == $recipe[$type . '_time_hours']) {
+          ?>
+          <option value="<?= $i ?>" selected><?= $i ?></option>
+          <?php
+        } else {
+          ?>
+          <option value="<?= $i ?>"><?= $i ?></option>
+          <?php
+        }
+      }
+    } elseif ($time == 'minutes') {
+      for ($i = 0; $i < $maxMinutes; $i += 5) {
+        if ($i == $recipe[$type . '_time_minutes']) {
           ?>
           <option value="<?= $i ?>" selected><?= $i ?></option>
           <?php
@@ -151,23 +148,7 @@ function generateMinutes($action, $type, $recipe)
         }
       }
     }
-
-    if ($type == 'cook') {
-      for ($i = 0; $i < $maxMinutes; $i += 5) {
-        if ($i == $recipe['cook_time_minutes']) {
-          ?>
-          <option value="<?= $i ?>" selected><?= $i ?></option>
-          <?php
-        } else {
-          ?>
-          <option value="<?= $i ?>"><?= $i ?></option>
-          <?php
-        }
-      }
-    }
-
   }
-
 }
 
 function generateSteps($recipe)

@@ -42,12 +42,7 @@ $action = 'edit';
     <div class="container-fluid">
       <a class="navbar-brand text-light" href="index.php">SavorySagas</a>
 
-      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button> -->
-
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link" href="signin.php" id="signinBtn">Sign in</a>
           <a class="nav-link" href="signup.php" id="signupBtn">Sign up</a>
@@ -105,17 +100,20 @@ $action = 'edit';
             </div>
 
             <div class="time_options">
+              <?php
+              $type = 'prep';
+              ?>
               <select name="prep_time_hours" class="time_hrs prep_time" id="prep_time_hrs">
                 <?php
-                $type = 'prep';
-                generateHours($action, $type, $recipe);
+                $time = 'hours';
+                generateTimeOptions($action, $type, $time, $recipe);
                 ?>
               </select>
               <br>
               <select name="prep_time_minutes" class="time_mins prep_time" id="prep_time_mins">
                 <?php
-                $type = 'prep';
-                generateMinutes($action, $type, $recipe);
+                $time = 'minutes';
+                generateTimeOptions($action, $type, $time, $recipe);
                 ?>
               </select>
             </div>
@@ -132,17 +130,20 @@ $action = 'edit';
             </div>
 
             <div class="time_options">
+              <?php
+              $type = 'cook';
+              ?>
               <select name="cook_time_hours" class="time_hrs cook_time" id="cook_time_hrs">
                 <?php
-                $type = 'cook';
-                generateHours($action, $type, $recipe);
+                $time = 'hours';
+                generateTimeOptions($action, $type, $time, $recipe);
                 ?>
               </select>
               <br>
               <select name="cook_time_minutes" class="time_mins cook_time" id="cook_time_mins">
                 <?php
-                $type = 'cook';
-                generateMinutes($action, $type, $recipe);
+                $time = 'minutes';
+                generateTimeOptions($action, $type, $time, $recipe);
                 ?>
               </select>
             </div>
@@ -150,8 +151,9 @@ $action = 'edit';
           </p>
 
           <p>
-            <strong>Total Time: &nbsp;&nbsp;</strong><input type="text" class="form-control" name="total_time"
-              id="m-total-time" value="<?= $recipe['total_time'] ?>" disabled />
+            <strong>Total Time: &nbsp;&nbsp;</strong>
+            <input type="text" class="form-control" name="total_time" id="m-total-time"
+              value="<?= $recipe['total_time'] ?>" disabled />
           </p>
 
           <p>
