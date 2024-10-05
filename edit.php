@@ -20,7 +20,7 @@ $action = 'edit';
     crossorigin="anonymous"></script>
   <script type="module" src="./js/form.js"></script>
 
-  <title>Create a Recipe</title>
+  <title>Edit a Recipe</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
@@ -194,12 +194,17 @@ $action = 'edit';
           </p>
 
           <div class="modal-footer" id="modalButton">
-            <button type="button" class="btn btn-secondary" id="btn-cancel">
-              Cancel
-            </button>
-            <button type="button" class="btn btn-primary" id="save-changes-btn">
-              Save
-            </button>
+            <a href="index.php">
+              <button type="button" class="btn btn-secondary" id="btn-cancel">
+                Cancel
+              </button>
+            </a>
+
+            <a href="index.php">
+              <button type="button" class="btn btn-primary" id="save-changes-btn">
+                Save
+              </button>
+            </a>
           </div>
         </form>
       </div>

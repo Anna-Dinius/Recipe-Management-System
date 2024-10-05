@@ -98,15 +98,20 @@ $recipe = null;
               &nbsp;&nbsp;Minutes:&nbsp;&nbsp;
             </div>
             <div class="time_options">
+              <?php
+              $type = 'prep';
+              ?>
               <select name="prep_time_hours" class="time_hrs prep_time" id="prep_time_hrs">
                 <?php
-                generateHours($action, $recipe);
+                $time = 'hours';
+                generateTimeOptions($action, $type, $time, $recipe);
                 ?>
               </select>
               <br>
               <select name="prep_time_minutes" class="time_mins prep_time" id="prep_time_mins">
                 <?php
-                generateMinutes($action, $recipe);
+                $time = 'minutes';
+                generateTimeOptions($action, $type, $time, $recipe);
                 ?>
               </select>
             </div>
@@ -122,15 +127,20 @@ $recipe = null;
               &nbsp;&nbsp;Minutes:&nbsp;&nbsp;
             </div>
             <div class="time_options">
+              <?php
+              $type = 'cook';
+              ?>
               <select name="cook_time_hours" class="time_hrs cook_time" id="cook_time_hrs">
                 <?php
-                generateHours($action, $recipe);
+                $time = 'hours';
+                generateTimeOptions($action, $type, $time, $recipe);
                 ?>
               </select>
               <br>
               <select name="cook_time_minutes" class="time_mins cook_time" id="cook_time_mins">
                 <?php
-                generateMinutes($action, $recipe);
+                $time = 'minutes';
+                generateTimeOptions($action, $type, $time, $recipe);
                 ?>
               </select>
             </div>
@@ -171,12 +181,17 @@ $recipe = null;
           </p>
 
           <div class="modal-footer" id="modalButton">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancel">
-              Cancel
-            </button>
-            <button type="button" class="btn btn-primary" id="save-changes-btn">
-              Save
-            </button>
+            <a href="index.php">
+              <button type="button" class="btn btn-secondary" id="btn-cancel">
+                Cancel
+              </button>
+            </a>
+
+            <a href="index.php">
+              <button type="button" class="btn btn-primary" id="save-changes-btn">
+                Save
+              </button>
+            </a>
           </div>
         </form>
       </div>
