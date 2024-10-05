@@ -1,7 +1,7 @@
 <?php
-include_once('functions.php');
+include_once('../utils/functions.php');
 
-$file = 'data/recipes.json';
+$file = '../data/recipes.json';
 $content = file_get_contents($file);
 $recipes = json_decode($content, true);
 
@@ -34,7 +34,7 @@ updateViewCount($id);
 		crossorigin="anonymous"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-	<link rel="stylesheet" href="./css/styles.css" type="text/css" />
+	<link rel="stylesheet" href="../css/styles.css" type="text/css" />
 </head>
 
 <body>
@@ -44,8 +44,8 @@ updateViewCount($id);
 
 			<div id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-link" href="signin.php" id="signinBtn">Sign in</a>
-					<a class="nav-link" href="signup.php" id="signupBtn">Sign up</a>
+					<a class="nav-link" href="../auth/signin.php" id="signinBtn">Sign in</a>
+					<a class="nav-link" href="../auth/signup.php" id="signupBtn">Sign up</a>
 				</div>
 			</div>
 		</div>
@@ -88,12 +88,12 @@ updateViewCount($id);
 
 						<div class="fw-bold text-center">Prep Time:</div>
 						<div id="prep_time" class="text-center">
-							<?= $recipe['prep_time'] ?>
+							<?php displayTime('prep', $recipe); ?>
 						</div>
 
 						<div class="fw-bold text-center">Cook Time:</div>
 						<div id="cook_time" class="text-center">
-							<?= $recipe['cook_time'] ?>
+							<?php displayTime('cook', $recipe); ?>
 						</div>
 
 						<div class="fw-bold text-center">Total Time:</div>
@@ -111,11 +111,7 @@ updateViewCount($id);
 					<div class="centerContent">
 						<ul id="ingredients">
 							<?php
-							for ($i = 0; $i < count($recipe['ingredients']); $i++) {
-								?>
-								<li id="item-<?= $i ?>"><?= $recipe['ingredients'][$i] ?></li>
-								<?php
-							}
+							displayIngredients($recipe);
 							?>
 						</ul>
 					</div>
@@ -124,11 +120,7 @@ updateViewCount($id);
 					<div class="centerContent">
 						<ol id="steps">
 							<?php
-							for ($i = 0; $i < count($recipe['steps']); $i++) {
-								?>
-								<li><?= $recipe['steps'][$i] ?></li>
-								<?php
-							}
+							displaySteps($recipe);
 							?>
 						</ol>
 					</div>

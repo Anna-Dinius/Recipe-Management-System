@@ -55,7 +55,7 @@ function displayCards($recipes)
   for ($i = 0; $i < count($recipes); $i++) {
     ?>
     <div class="card">
-      <a href="detail.php?recipe_id=<?= $recipes[$i]['id'] ?>">
+      <a href="../entity/detail.php?recipe_id=<?= $recipes[$i]['id'] ?>">
         <div class="img-div">
           <img src="<?= $recipes[$i]['image'] ?>">
         </div>
@@ -68,10 +68,29 @@ function displayCards($recipes)
       </a>
 
       <div class="d-flex btns" id="btn-box-<?= $recipes[$i]['id'] ?>">
-        <a href="delete.php?recipe_id=<?= $recipes[$i]['id'] ?>" class="btn btn-sm btn-danger btn-delete">Delete</a>
-        <a href="edit.php?recipe_id=<?= $recipes[$i]['id'] ?>" class="btn btn-secondary update-btn">Edit</a>
+        <a href="../entity/delete.php?recipe_id=<?= $recipes[$i]['id'] ?>"
+          class="btn btn-sm btn-danger btn-delete">Delete</a>
+        <a href="../entity/edit.php?recipe_id=<?= $recipes[$i]['id'] ?>" class="btn btn-secondary update-btn">Edit</a>
       </div>
     </div>
+    <?php
+  }
+}
+
+function displayIngredients($recipe)
+{
+  for ($i = 0; $i < count($recipe['ingredients']); $i++) {
+    ?>
+    <li id="item-<?= $i ?>"><?= $recipe['ingredients'][$i] ?></li>
+    <?php
+  }
+}
+
+function displaySteps($recipe)
+{
+  for ($i = 0; $i < count($recipe['steps']); $i++) {
+    ?>
+    <li><?= $recipe['steps'][$i] ?></li>
     <?php
   }
 }
@@ -190,4 +209,37 @@ function generateCategory($recipe)
       <?php
     }
   }
+}
+
+function displayTime($type, $recipe)
+{
+  $hours = $recipe[$type . '_time_hours'];
+  $minutes = $recipe[$type . '_time_minutes'];
+  $time = '';
+
+  if ($hours == 0) {
+    $hours = '';
+  } elseif ($hours == 1) {
+    $hours = $hours . ' hour';
+  } elseif ($hours > 1) {
+    $hours = $hours . ' hours';
+  }
+
+  if ($minutes == 0) {
+    $minutes = '';
+  } elseif ($minutes > 1) {
+    $minutes = $minutes . ' minutes';
+  }
+
+  if ($hours != '' && $minutes != '') {
+    $time = $hours . ', ' . $minutes;
+  } else if ($hours == '') {
+    $time = $minutes;
+  } else if ($minutes == '') {
+    $time = $hours;
+  } else {
+    $time = 'Error fetching time';
+  }
+
+  echo $time;
 }

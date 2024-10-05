@@ -1,14 +1,12 @@
 <?php
-include_once('functions.php');
+include_once('../utils/functions.php');
 
-$file = 'data/recipes.json';
+$file = '../data/recipes.json';
 $content = file_get_contents($file);
 $recipes = json_decode($content, true);
 
-$id = $_GET['recipe_id'];
-$recipe = getRecipe($recipes, $id);
-
-$action = 'edit';
+$action = 'create';
+$recipe = null;
 
 ?>
 
@@ -20,7 +18,7 @@ $action = 'edit';
     crossorigin="anonymous"></script>
   <script type="module" src="./js/form.js"></script>
 
-  <title>Edit a Recipe</title>
+  <title>Create a Recipe</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
@@ -34,7 +32,7 @@ $action = 'edit';
     crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-  <link rel="stylesheet" href="./css/styles.css" type="text/css" />
+  <link rel="stylesheet" href="../css/styles.css" type="text/css" />
 </head>
 
 <body>
@@ -44,8 +42,8 @@ $action = 'edit';
 
       <div id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link" href="signin.php" id="signinBtn">Sign in</a>
-          <a class="nav-link" href="signup.php" id="signupBtn">Sign up</a>
+          <a class="nav-link" href="../auth/signin.php" id="signinBtn">Sign in</a>
+          <a class="nav-link" href="../auth/signup.php" id="signupBtn">Sign up</a>
         </div>
       </div>
     </div>
@@ -73,19 +71,20 @@ $action = 'edit';
           <p>
             <strong>Recipe Name: </strong>
             <span class="required">*</span>
-            <input type="text" class="form-control" name="name" id="recipe-name" value="<?= $recipe['name'] ?>" />
+            <input type="text" class="form-control" name="name" id="recipe-name" />
           </p>
 
           <p>
             <strong>Author: </strong>
-            <input type="text" class="form-control" name="author" id="m-authorName" value="<?= $recipe['author'] ?>"
-              disabled />
+            <input type="text" class="form-control" name="author" id="m-authorName" disabled />
           </p>
 
           <p>
             <strong>Category: &nbsp;&nbsp;</strong>
             <select name="category" id="m-category">
-              <?php generateCategory($recipe); ?>
+              <option value="Entrees">Entrees</option>
+              <option value="Sides">Sides</option>
+              <option value="Desserts">Desserts</option>
             </select>
           </p>
 
@@ -98,7 +97,6 @@ $action = 'edit';
               <br>
               &nbsp;&nbsp;Minutes:&nbsp;&nbsp;
             </div>
-
             <div class="time_options">
               <?php
               $type = 'prep';
@@ -128,7 +126,6 @@ $action = 'edit';
               <br>
               &nbsp;&nbsp;Minutes:&nbsp;&nbsp;
             </div>
-
             <div class="time_options">
               <?php
               $type = 'cook';
@@ -148,12 +145,11 @@ $action = 'edit';
               </select>
             </div>
           </div>
-          </p>
 
+          </p>
           <p>
-            <strong>Total Time: &nbsp;&nbsp;</strong>
-            <input type="text" class="form-control" name="total_time" id="m-total-time"
-              value="<?= $recipe['total_time'] ?>" disabled />
+            <strong>Total Time: &nbsp;&nbsp;</strong><input type="text" class="form-control" name="total_time"
+              id="m-total-time" disabled />
           </p>
 
           <p>
@@ -167,29 +163,20 @@ $action = 'edit';
           </p>
 
           <p>
-            <strong>Image: &nbsp;&nbsp;</strong><input class="form-control" name="image"
-              value="<?= $recipe['image'] ?>" />
+            <strong>Image: &nbsp;&nbsp;</strong><input class="form-control" name="image" />
           </p>
 
           <p>
             <strong>Ingredients: </strong>
             <span class="required">*</span>
-          <div id="m-ingredients">
-            <?php
-            generateIngredients($recipe);
-            ?>
-          </div>
+          <div id="m-ingredients"></div>
           <button id="add-ingredient" class="btn btn-secondary">Add Ingredient</button>
           </p>
 
           <p>
             <strong>Steps: </strong>
             <span class="required">*</span>
-          <div id="m-steps">
-            <?php
-            generateSteps($recipe);
-            ?>
-          </div>
+          <div id="m-steps"></div>
           <button id="add-step" class="btn btn-secondary">Add Step</button>
           </p>
 
