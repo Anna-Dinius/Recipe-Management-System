@@ -7,6 +7,8 @@ $recipes = json_decode($content, true);
 
 $id = $_GET['recipe_id'];
 
+$recipe = getRecipe($recipes, $id);
+
 ?>
 
 <!doctype html>
@@ -65,7 +67,13 @@ $id = $_GET['recipe_id'];
           <br><br><br>
         </div>
 
-        <h1>Delete.php</h1>
+        <h2>Are you sure you want to delete the <?= $recipe['name']; ?> recipe?</h2>
+        <p>This action cannot be undone.</p>
+
+        <div class="d-flex btns" id="btn-box-<?= $recipe['id'] ?>">
+          <a href="index.php" class="btn btn-secondary update-btn">Cancel</a>
+          <a href="index.php" class="btn btn-sm btn-danger btn-delete">Delete</a>
+        </div>
       </div>
     </div>
   </main>
