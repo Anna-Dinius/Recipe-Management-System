@@ -39,33 +39,57 @@
       </div>
     </div>
   </nav>
+  <?php
 
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    if(count($_POST) > 0){
+      echo '<pre>';
+      print_r($_POST);
+
+      //Grab data from $_POST.
+      $firstName = trim($_POST['firstName']);
+      $lastName = trim($_POST['lastName']);
+      $email = trim($_POST['email']);
+      $password = trim($_POST['password']);
+
+      $data = [$firstName, $lastName, $email, $password];
+
+      //Appends data to csv file.
+      $f = "../data/users.csv";
+      $fp = fopen($f, 'a');
+      fputcsv($fp, $data);
+      fclose($fp);
+
+
+    }else{
+  ?>
   <main>
     <div class="d-flex ms-3">
       <div class="h-100 d-flex align-items-center justify-content-center signInUp">
         <h2>Sign Up</h2>
-        <form class="position-absolute top-50 start-50 translate-middle card">
+        <form class="position-absolute top-50 start-50 translate-middle card" method="POST" action="signup.php">
           <div class="form-group m-3">
             <label for="First Name">First Name</label><span class="required">*</span>
-            <input type="text" class="form-control" id="firstName" aria-describedby="firstNameHelp"
+            <input type="text" class="form-control" id="firstName" aria-describedby="firstNameHelp" name="firstName" required
               placeholder="Enter First Name" />
           </div>
 
           <div class="form-group m-3">
             <label for="Last Name">Last Name</label><span class="required">*</span>
-            <input type="text" class="form-control" id="lastName" aria-describedby="lastNameHelp"
+            <input type="text" class="form-control" id="lastName" aria-describedby="lastNameHelp" name="lastName" required
               placeholder="Enter Last Name" />
           </div>
 
           <div class="form-group m-3">
             <label for="email">Email address</label><span class="required">*</span>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" required
               placeholder="Enter email" />
           </div>
 
           <div class="form-group m-3">
             <label for="password">Password</label><span class="required">*</span>
-            <input type="password" class="form-control" id="password" placeholder="Password" />
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password" required/>
           </div>
 
           <button id="signup" type="submit" class="btn btn-primary">
@@ -81,6 +105,7 @@
       </div>
     </div>
   </main>
+  <?php } ?>
 </body>
 
 </html>
