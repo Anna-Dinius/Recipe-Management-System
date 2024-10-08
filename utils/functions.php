@@ -25,10 +25,22 @@ function getNav()
   <div class="container-fluid">
     <a class="navbar-brand text-light" href="index.php">SavorySagas</a>
 
+    <?php
+    $userSignedIn = false;
+    ?>
     <div id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="../auth/signin.php" id="signinBtn">Sign in</a>
-        <a class="nav-link" href="../auth/signup.php" id="signupBtn">Sign up</a>
+        <?php
+        if ($userSignedIn) {
+          ?>
+          <a class="nav-link" href="../entity/index.php" id="signinBtn">Sign out</a>
+          <?php
+        } else {
+          ?>
+          <a class="nav-link" href="../auth/signin.php" id="signinBtn">Sign in</a>
+          <a class="nav-link" href="../auth/signup.php" id="signupBtn">Sign up</a>
+          <?php
+        } ?>
       </div>
     </div>
   </div>
@@ -47,18 +59,37 @@ function getRecipe($recipes, $id)
   return null;
 }
 
+$visitors_file = '../data/visitors.csv';
+
+function getViewCount($target_id)
+{
+  if (file_exists('../data/visitors.csv')) {
+    $lines = file('../data/visitors.csv');
+
+    for ($i = 0; $i < count($lines); $i++) {
+      $line = explode(';', $lines[$i]);
+      $id = trim($line[0]);
+      $views = trim($line[1]);
+
+      if ($id == $target_id) {
+        return $views;
+      }
+    }
+  } else {
+    return 'View count not found';
+  }
+}
+
 function updateViewCount($target_id)
 {
-  if (file_exists('visitors.csv')) {
-    $lines = file('visitors.csv');
+  if (file_exists('../data/visitors.csv')) {
+    $lines = file('../data/visitors.csv');
     $updated_lines = [];
     $views = 0;
 
     for ($i = 0; $i < count($lines); $i++) {
       $line = explode(';', $lines[$i]);
-
       $id = trim($line[0]);
-
       $views = trim($line[1]);
 
       if ($id == $target_id) {
@@ -69,7 +100,7 @@ function updateViewCount($target_id)
     }
 
     // writing to the file
-    $fp = fopen('visitors.csv', 'w');
+    $fp = fopen('../data/visitors.csv', 'w');
 
     foreach ($updated_lines as $line) {
       fputs($fp, $line . PHP_EOL);

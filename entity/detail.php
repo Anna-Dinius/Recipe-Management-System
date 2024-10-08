@@ -49,6 +49,7 @@ $title = 'Recipe Details';
 					<h3 id="name">
 						<?= $recipe['name'] ?>
 					</h3>
+					<p class="view_count">Total views: <?= getViewCount($id) ?></p>
 					<h3 id="author">
 						By: <?= $recipe['author'] ?>
 					</h3>
