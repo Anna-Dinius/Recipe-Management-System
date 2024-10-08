@@ -4,21 +4,19 @@ $(document).on("click", ".del-input", function() {
 });
 
 $(document).on("click", "#add-ingredient", function() {
-    let name = $(".ingredient-input").length + 1;
     $("#m-ingredients").append(
         `<div class="d-flex">
-			<input class="form-control mb-3 ingredient-input" id="ingredient-${name}"/>
-			<button class="btn btn-danger del-input">X</button>
+			<input class="form-control mb-3 ingredient-input" name="ingredient[]"/>
+			<button type="button" class="btn btn-danger del-input">X</button>
 		</div>`,
     );
 });
 
 $(document).on("click", "#add-step", function() {
-    let name = $(".step-input").length + 1;
     $("#m-steps").append(
         `<div class="d-flex">
-			<textarea class="form-control textarea mb-3 step-input" id="step-${name}"></textarea>
-			<button class="btn btn-danger del-input">X</button>
+			<textarea class="form-control textarea mb-3 step-input" name="step[]"></textarea>
+			<button type="button" class="btn btn-danger del-input">X</button>
 		</div>`,
     );
 });

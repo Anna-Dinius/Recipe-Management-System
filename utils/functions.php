@@ -176,7 +176,7 @@ function generateSteps($recipe)
     ?>
     <div class="d-flex">
       <textarea class="form-control mb-3 step-input" id="step-<?= $i + 1 ?>"><?= $recipe['steps'][$i] ?></textarea>
-      <button class="btn btn-danger del-input">X</button>
+      <button type="button" class="btn btn-danger del-input">X</button>
     </div>
     <?php
   }
@@ -188,7 +188,7 @@ function generateIngredients($recipe)
     <div class="d-flex">
       <input class="form-control mb-3 ingredient-input" id="ingredient-<?= $i + 1 ?>"
         value="<?= $recipe['ingredients'][$i] ?>" />
-      <button class="btn btn-danger del-input">X</button>
+      <button type="button" class="btn btn-danger del-input">X</button>
     </div>
     <?php
   }
