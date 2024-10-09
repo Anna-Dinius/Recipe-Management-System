@@ -24,15 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $ingredients = $_POST['ingredients'];
   $steps = $_POST['steps'];
 
-  // Logic to add new fields based on how many ingredients or steps are submitted
-    if (isset($_POST['add_ingredient'])) {
-        $ingredients[] = ''; // Add an empty field for a new ingredient
-    }
-
-    if (isset($_POST['add_step'])) {
-        $steps[] = ''; // Add an empty field for a new step
-    }
-
   $total_time_hours = $prep_time_hours + $cook_time_hours;
   $total_time_minutes = $prep_time_minutes + $cook_time_minutes;
   if ($total_time_minutes >= 60) {
@@ -43,8 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $new_recipe = [
     'id' => count($recipes) + 1,
     'name' => $name,
-    //'author' => $author,
-    //Will be tied to account holder
+    'author' => "Unidentified Author", //Will be tied to account holder
     'category' => $category,
     'image' => $image,
     'prep_time_hours' => $prep_time_hours,
@@ -57,7 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     'steps' => $steps,
   ];
 
-  
+  $recipes[] = $new_recipe;
+  $content = json_encode($recipes, true);
+  file_put_contents('../data/recipes.json', $content);
 }
 
 // Uncomment for testing purposes:
