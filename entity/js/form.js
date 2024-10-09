@@ -6,7 +6,7 @@ $(document).on("click", ".del-input", function() {
 $(document).on("click", "#add-ingredient", function() {
     $("#m-ingredients").append(
         `<div class="d-flex">
-			<input class="form-control mb-3 ingredient-input" name="ingredient[]"/>
+			<input class="form-control mb-3 ingredient-input" name="ingredients[]"/>
 			<button type="button" class="btn btn-danger del-input">X</button>
 		</div>`,
     );
@@ -15,7 +15,7 @@ $(document).on("click", "#add-ingredient", function() {
 $(document).on("click", "#add-step", function() {
     $("#m-steps").append(
         `<div class="d-flex">
-			<textarea class="form-control textarea mb-3 step-input" name="step[]"></textarea>
+			<textarea class="form-control textarea mb-3 step-input" name="steps[]"></textarea>
 			<button type="button" class="btn btn-danger del-input">X</button>
 		</div>`,
     );

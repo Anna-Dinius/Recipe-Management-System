@@ -21,8 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $cook_time_hours = $_POST['cook_time_hours'];
   $cook_time_minutes = $_POST['cook_time_minutes'];
   $servings = $_POST['servings'];
-  //$ingredients = $_POST['ingredients'];
-  //$steps = $_POST['steps'];
+  $ingredients = $_POST['ingredients'];
+  $steps = $_POST['steps'];
+
+  // Logic to add new fields based on how many ingredients or steps are submitted
+    if (isset($_POST['add_ingredient'])) {
+        $ingredients[] = ''; // Add an empty field for a new ingredient
+    }
+
+    if (isset($_POST['add_step'])) {
+        $steps[] = ''; // Add an empty field for a new step
+    }
 
   $total_time_hours = $prep_time_hours + $cook_time_hours;
   $total_time_minutes = $prep_time_minutes + $cook_time_minutes;
@@ -44,11 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     'cook_time_minutes' => $cook_time_minutes,
     'total_time' => "{$total_time_hours} hours {$total_time_minutes} minutes",
     'servings' => $servings,
-    //'ingredients' => $ingredients,
-    //'steps' => $steps,
+    'ingredients' => $ingredients,
+    'steps' => $steps,
   ];
 
-  print_r($new_recipe);
+  
 }
 
 // Uncomment for testing purposes:
