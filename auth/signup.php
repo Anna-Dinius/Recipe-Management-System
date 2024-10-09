@@ -55,10 +55,30 @@
 
       $data = [$firstName, $lastName, $email, $password];
 
-      //Appends data to csv file.
+      //Flag
+      $emailNotAdded = True;
+
+      //Opening File in Append and read mode. Rewind the pointer to the beginning and then loop through the file to find the email.
       $f = "../data/users.csv";
-      $fp = fopen($f, 'a');
-      fputcsv($fp, $data);
+      $fp = fopen($f, 'a+');
+      rewind($fp);
+
+      //Checking if email is in use
+      while($emailNotAdded){
+        $csvLine = fgetcsv($fp);
+        if($csvLine == FALSE){
+          break;
+        }
+        if ($csvLine[2] === $email){
+          $emailNotAdded = FALSE;
+        }
+      }
+      //If the flag did not go off, that means the email is not in use thus the account can be added.
+      if ($emailNotAdded){
+        fputcsv($fp, $data);
+      }else{
+        echo 'Email already in use!';
+      }
       fclose($fp);
 
 
