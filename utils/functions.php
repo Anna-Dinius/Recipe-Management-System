@@ -1,5 +1,52 @@
 <?php
 
+function getHead($title)
+{
+  ?>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+  <script type="module" src="./js/form.js"></script>
+
+  <title><?= $title ?></title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../css/styles.css" type="text/css" />
+  <?php
+}
+
+function getNav()
+{
+  ?>
+  <div class="container-fluid">
+    <a class="navbar-brand text-light" href="index.php">SavorySagas</a>
+
+    <?php
+    $userSignedIn = false;
+    ?>
+    <div id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <?php
+        if ($userSignedIn) {
+          ?>
+          <a class="nav-link" href="../entity/index.php" id="signinBtn">Sign out</a>
+          <?php
+        } else {
+          ?>
+          <a class="nav-link" href="../auth/signin.php" id="signinBtn">Sign in</a>
+          <a class="nav-link" href="../auth/signup.php" id="signupBtn">Sign up</a>
+          <?php
+        } ?>
+      </div>
+    </div>
+  </div>
+  <?php
+}
+
 function getRecipe($recipes, $id)
 {
   for ($i = 0; $i < count($recipes); $i++) {
@@ -12,18 +59,37 @@ function getRecipe($recipes, $id)
   return null;
 }
 
+$visitors_file = '../data/visitors.csv';
+
+function getViewCount($target_id)
+{
+  if (file_exists('../data/visitors.csv')) {
+    $lines = file('../data/visitors.csv');
+
+    for ($i = 0; $i < count($lines); $i++) {
+      $line = explode(';', $lines[$i]);
+      $id = trim($line[0]);
+      $views = trim($line[1]);
+
+      if ($id == $target_id) {
+        return $views;
+      }
+    }
+  } else {
+    return 'View count not found';
+  }
+}
+
 function updateViewCount($target_id)
 {
-  if (file_exists('visitors.csv')) {
-    $lines = file('visitors.csv');
+  if (file_exists('../data/visitors.csv')) {
+    $lines = file('../data/visitors.csv');
     $updated_lines = [];
     $views = 0;
 
     for ($i = 0; $i < count($lines); $i++) {
       $line = explode(';', $lines[$i]);
-
       $id = trim($line[0]);
-
       $views = trim($line[1]);
 
       if ($id == $target_id) {
@@ -34,7 +100,7 @@ function updateViewCount($target_id)
     }
 
     // writing to the file
-    $fp = fopen('visitors.csv', 'w');
+    $fp = fopen('../data/visitors.csv', 'w');
 
     foreach ($updated_lines as $line) {
       fputs($fp, $line . PHP_EOL);
@@ -176,7 +242,7 @@ function generateSteps($recipe)
     ?>
     <div class="d-flex">
       <textarea class="form-control mb-3 step-input" id="step-<?= $i + 1 ?>"><?= $recipe['steps'][$i] ?></textarea>
-      <button class="btn btn-danger del-input">X</button>
+      <button type="button" class="btn btn-danger del-input">X</button>
     </div>
     <?php
   }
@@ -188,7 +254,7 @@ function generateIngredients($recipe)
     <div class="d-flex">
       <input class="form-control mb-3 ingredient-input" id="ingredient-<?= $i + 1 ?>"
         value="<?= $recipe['ingredients'][$i] ?>" />
-      <button class="btn btn-danger del-input">X</button>
+      <button type="button" class="btn btn-danger del-input">X</button>
     </div>
     <?php
   }

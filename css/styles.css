@@ -149,6 +149,9 @@ body {
 }
 
 /***************DETAIL PAGE STYLES***************/
+.view_count {
+  text-align: center;
+}
 
 .container {
   margin-left: auto;
@@ -232,3 +235,4 @@ a {
     width: 18rem;
   }
 }
+
