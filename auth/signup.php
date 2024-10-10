@@ -40,9 +40,7 @@
     </div>
   </nav>
   <?php
-
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+  
     if(count($_POST) > 0){
       echo '<pre>';
       print_r($_POST);
