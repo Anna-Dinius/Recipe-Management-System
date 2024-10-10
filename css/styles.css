@@ -6,6 +6,25 @@ body {
 }
 
 /***************INDEX PAGE STYLES***************/
+#content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1200px) {
+  #content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  #content {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 #filter {
   display: flex;
   align-items: center;
@@ -19,7 +38,6 @@ body {
   display: none;
 }
 .card {
-  width: calc(33.33% - 20px);
   height: auto;
   box-sizing: border-box;
   padding: 20px;
@@ -120,6 +138,14 @@ body {
   display: flex;
   justify-content: flex-end;
 }
+
+.navbar-nav {
+  flex-direction: row;
+}
+.nav-link {
+  padding: 8px;
+}
+
 .turqoise{
 	background-color: #008080;
 }
