@@ -10,6 +10,15 @@ $recipe = getRecipe($recipes, $id);
 
 $title = 'Delete a Recipe';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  for($i = 0; $i < count($recipes); $i++) {
+    if ($recipes[$i]['id'] == $id) {
+      print_r($recipes[$i]['id']);
+      $recipes = array_splice($recipes, $i, 1);
+    }
+  }
+}
+
 ?>
 
 <!doctype html>
@@ -43,10 +52,10 @@ $title = 'Delete a Recipe';
         <p>This action cannot be undone.</p>
 
         <div class="d-flex btns" id="btn-box-<?= $recipe['id'] ?>">
-          <a href="index.php" class="btn btn-secondary update-btn">Cancel</a>
-          <a href="index.php">
+          <form method="post" action="index.php">
+            <a href="index.php" class="btn btn-secondary update-btn">Cancel</a>
             <button type="submit" class="btn btn-sm btn-danger btn-delete">Delete</button>
-          </a>
+          </form>
         </div>
       </div>
     </div>
