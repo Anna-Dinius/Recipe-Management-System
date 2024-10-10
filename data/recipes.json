@@ -1,5 +1,42 @@
 [
     {
+        "id": 3,
+        "name": "Oatmeal Raisin Cookies",
+        "category": "Desserts",
+        "author": "Healthy Eats Helen",
+        "image": "https:\/\/www.simplyrecipes.com\/thmb\/2g1IOS6TYdG_bmyg0hyf0b6RKGY=\/1500x0\/filters:no_upscale():max_bytes(150000):strip_icc()\/Simply-Recipes-Oatmeal-Raisin-Cookies-LEAD-15-2251dafb1a554aafaedf42e797bf2fd0.jpg",
+        "prep_time_hours": "0",
+        "prep_time_minutes": "10",
+        "cook_time_hours": "0",
+        "cook_time_minutes": "15",
+        "total_time": "0 hours 25 minutes",
+        "servings": "12",
+        "ingredients": [
+            "1 cup old-fashioned oats",
+            "3\/4 cup all-purpose flour",
+            "1\/2 teaspoon baking soda",
+            "1\/2 teaspoon ground cinnamon",
+            "1\/4 teaspoon salt",
+            "1\/2 cup unsalted butter, softened",
+            "1\/2 cup granulated sugar",
+            "1\/2 cup packed light-brown sugar",
+            "1 large egg",
+            "1 teaspoon vanilla extract",
+            "1 cup raisins"
+        ],
+        "steps": [
+            "Preheat oven to 350\u00b0F (175\u00b0C). Line baking sheets with parchment paper.",
+            "In a bowl, combine oats, flour, baking soda, cinnamon, and salt.",
+            "In a separate large bowl, cream together butter, granulated sugar, and brown sugar until smooth.",
+            "Beat in egg and vanilla extract until well combined.",
+            "Gradually add the dry ingredients to the wet ingredients, mixing until just combined.",
+            "Stir in raisins.",
+            "Drop rounded tablespoons of dough onto prepared baking sheets.",
+            "Bake for 10-12 minutes or until the edges are golden brown.",
+            "Cool on wire racks before serving."
+        ]
+    },
+    {
         "id": 4,
         "name": "Garlic Parmesan Roasted Brussels Sprouts",
         "category": "Sides",

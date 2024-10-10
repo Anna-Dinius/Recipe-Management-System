@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   ];
 
   $recipes[] = $new_recipe;
-  $content = json_encode($recipes, true);
+  $content = json_encode($recipes, JSON_PRETTY_PRINT);
   file_put_contents('../data/recipes.json', $content);
 }
 
