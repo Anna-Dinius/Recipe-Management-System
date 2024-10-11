@@ -24,6 +24,10 @@ $title = 'Recipes';
 	</nav>
 
 	<main>
+		<?php
+			//Displays Create button if the user is signed in.
+			if(isset($_SESSION['signedIn'])){
+		?>
 		<div class="d-flex ms-3">
 			<div id="create">
 				<a href="create.php" id="create-btn" class="btn btn-primary">
@@ -31,6 +35,7 @@ $title = 'Recipes';
 				</a>
 			</div>
 		</div>
+		<?php }?>
 
 		<div id="content">
 			<?php

@@ -23,7 +23,7 @@ function getNav()
 {
   ?>
   <div class="container-fluid">
-    <a class="navbar-brand text-light" href="index.php">SavorySagas</a>
+    <a class="navbar-brand text-light" href="/Recipe-Management-System/entity/index.php">SavorySagas</a>
 
     <?php
     if(isset($_SESSION['signedIn']))
@@ -33,7 +33,7 @@ function getNav()
         <?php
         if (isset($_SESSION['signedIn'])) {
           ?>
-          <a class="nav-link" href="../entity/index.php" id="signinBtn">Sign out</a>
+          <a class="nav-link" href="../auth/logout.php" id="signinBtn">Sign out</a>
           <?php
         } else {
           ?>
@@ -132,12 +132,13 @@ function displayCards($recipes)
 
         <p class="author">Author: <?= $recipes[$i]['author'] ?></p>
       </a>
-
+      <?php if(isset($_SESSION['signedIn'])){ ?>
       <div class="d-flex btns" id="btn-box-<?= $recipes[$i]['id'] ?>">
         <a href="../entity/delete.php?recipe_id=<?= $recipes[$i]['id'] ?>"
           class="btn btn-sm btn-danger btn-delete">Delete</a>
         <a href="../entity/edit.php?recipe_id=<?= $recipes[$i]['id'] ?>" class="btn btn-secondary update-btn">Edit</a>
       </div>
+      <?php } ?>
     </div>
     <?php
   }
