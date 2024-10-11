@@ -44,7 +44,7 @@ $title = 'Sign Up';
         if($csvLine == FALSE){
           break;
         }
-        if ($csvLine[2] === $email){
+        if ($csvLine[2] == $email){
           $emailNotAdded = FALSE;
         }
       }
@@ -57,6 +57,8 @@ $title = 'Sign Up';
       }else{
         fputcsv($fp, $data);
         fclose($fp);
+        echo '<script>alert("Email already in use!")</script>';
+        sleep(2);
         header('location:signup.php'); //Redirects user to sign in where the session start is.
       }
       fclose($fp);
