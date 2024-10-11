@@ -12,11 +12,11 @@ $recipe = null;
 
 $title = 'Create a Recipe';
 
+$author = $_SESSION['name'];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
   $category = $_POST['category'];
-  //$author = $_POST['author'];
-  //Will be tied to account holder
   $image = $_POST['image'];
   $prep_time_hours = $_POST['prep_time_hours'];
   $prep_time_minutes = $_POST['prep_time_minutes'];
@@ -34,9 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   $new_recipe = [
-    'id' => count($recipes) + 1,
+    'id' => count($recipes) + 2,
     'name' => $name,
-    'author' => "Unidentified Author", //Will be tied to account holder
+    'author' => $author,
     'category' => $category,
     'image' => $image,
     'prep_time_hours' => $prep_time_hours,
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <p>
             <strong>Author: </strong>
-            <input type="text" class="form-control" name="author" id="m-authorName" disabled />
+            <input type="text" class="form-control" name="author" id="m-authorName" value="<?= $author ?>" disabled />
           </p>
 
           <p>
