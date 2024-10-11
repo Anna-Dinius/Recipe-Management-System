@@ -16,7 +16,7 @@ $title = 'Sign In';
     <nav class="navbar navbar-expand-lg navbar-light mb-2 turqoise">
         <?= getNav(); ?>
     </nav>
-    <?php 
+    <?php
         if(count($_POST) > 0){
             //Opens file
             $file = '../data/users.csv';
@@ -27,6 +27,7 @@ $title = 'Sign In';
                     $fp = fclose($fp);
                     session_start();
                     $_SESSION['signedIn'] = TRUE;
+                    $_SESSION['name'] = $data[0] . ' ' . $data[1];
                     header('location:../index.php'); //Once signed in, a creation is started.
                     exit();
                 }
@@ -62,7 +63,7 @@ $title = 'Sign In';
             </div>
         </div>
     </main>
-    <?php 
+    <?php
         }
     ?>
 </body>
