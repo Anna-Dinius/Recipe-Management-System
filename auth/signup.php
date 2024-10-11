@@ -51,8 +51,13 @@ $title = 'Sign Up';
       //If the flag did not go off, that means the email is not in use thus the account can be added.
       if ($emailNotAdded){
         fputcsv($fp, $data);
+        fclose($fp);
+        header('location:signin.php'); //Redirects user to sign in where the session start is.
+        exit();
       }else{
-        echo 'Email already in use!';
+        fputcsv($fp, $data);
+        fclose($fp);
+        header('location:signup.php'); //Redirects user to sign in where the session start is.
       }
       fclose($fp);
 

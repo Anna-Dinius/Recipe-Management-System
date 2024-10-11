@@ -18,19 +18,22 @@ $title = 'Sign In';
     </nav>
     <?php 
         if(count($_POST) > 0){
-            echo '<pre>';
-            print_r($_POST);
             //Opens file
             $file = '../data/users.csv';
             $fp = fopen($file, 'r');
             //Checks for correct log in information.
             while(($data = fgetcsv($fp)) !== FALSE){
-                echo(count($data));
                 if($_POST['email'] == $data[2] && $_POST['password'] == $data[3]){
-                    echo('LOGIN!'); //Log in functionality
+                    $fp = fclose($fp);
+                    session_start();
+                    $_SESSION['signedIn'] = TRUE;
+                    header('location:../index.php'); //Once signed in, a creation is started.
+                    exit();
                 }
             }
             $fp = fclose($fp);
+            header('location:signin.php');
+            exit();
         }else{
     ?>
     <main>

@@ -1,6 +1,8 @@
 <?php
 include_once('../utils/functions.php');
 
+session_start();
+
 $file = '../data/recipes.json';
 $content = file_get_contents($file);
 $recipes = json_decode($content, true);

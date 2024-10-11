@@ -26,12 +26,12 @@ function getNav()
     <a class="navbar-brand text-light" href="index.php">SavorySagas</a>
 
     <?php
-    $userSignedIn = false;
+    if(isset($_SESSION['signedIn']))
     ?>
     <div id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <?php
-        if ($userSignedIn) {
+        if (isset($_SESSION['signedIn'])) {
           ?>
           <a class="nav-link" href="../entity/index.php" id="signinBtn">Sign out</a>
           <?php
