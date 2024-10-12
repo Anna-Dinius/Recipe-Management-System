@@ -55,7 +55,6 @@ $title = 'Sign Up';
         header('location:signin.php'); //Redirects user to sign in where the session start is.
         exit();
       }else{
-        fputcsv($fp, $data);
         fclose($fp);
         header('location:signup.php'); //Redirects user to sign in where the session start is.
       }
