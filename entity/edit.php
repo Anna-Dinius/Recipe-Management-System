@@ -60,9 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $content = json_encode($recipes, JSON_PRETTY_PRINT);
   file_put_contents('../data/recipes.json', $content);
 
-  echo '<pre>';
-  print_r($_POST);
-  echo '</pre>';
 }
 ?>
 
