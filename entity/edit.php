@@ -13,6 +13,57 @@ $recipe = getRecipe($recipes, $id);
 $action = 'edit';
 $title = 'Edit a Recipe';
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = $_POST['name'];
+  $category = $_POST['category'];
+  $image = $_POST['image'];
+  $prep_time_hours = $_POST['prep_time_hours'];
+  $prep_time_minutes = $_POST['prep_time_minutes'];
+  $cook_time_hours = $_POST['cook_time_hours'];
+  $cook_time_minutes = $_POST['cook_time_minutes'];
+  $servings = $_POST['servings'];
+  if (isset($_POST['ingredients'])) {
+    $ingredients = $_POST['ingredients'];
+  }
+  if (isset($_POST['steps'])) {
+    $steps = $_POST['steps'];
+  }
+
+  $total_time_hours = $prep_time_hours + $cook_time_hours;
+  $total_time_minutes = $prep_time_minutes + $cook_time_minutes;
+  if ($total_time_minutes >= 60) {
+    $total_time_hours++;
+    $total_time_minutes = $total_time_minutes % 60;
+  }
+
+  for($i = 0; $i < count($recipes); $i++) {
+    if ($recipes[$i]['id'] == $id) {
+      $recipes[$i]['name'] = $name;
+      $recipes[$i]['category'] = $category;
+      $recipes[$i]['image'] = $image;
+      $recipes[$i]['prep_time_hours'] = $prep_time_hours;
+      $recipes[$i]['prep_time_minutes'] = $prep_time_minutes;
+      $recipes[$i]['cook_time_hours'] = $cook_time_hours;
+      $recipes[$i]['cook_time_minutes'] = $cook_time_minutes;
+      $recipes[$i]['total_time'] = "{$total_time_hours} hours {$total_time_minutes} minutes";
+      if(isset($ingredients)) {
+        $recipes[$i]['ingredients'] = array_merge($recipes[$i]['ingredients'], $ingredients);
+      }
+      if(isset($steps)) {
+        $recipes[$i]['steps'] = array_merge($recipes[$i]['steps'], $steps);
+      }
+      break;
+    }
+  }
+
+  $content = json_encode($recipes, JSON_PRETTY_PRINT);
+  file_put_contents('../data/recipes.json', $content);
+
+  echo '<pre>';
+  print_r($_POST);
+  echo '</pre>';
+}
 ?>
 
 <!doctype html>
@@ -42,7 +93,7 @@ $title = 'Edit a Recipe';
           <br><br><br>
         </div>
 
-        <form onsubmit="return false;" id="change-form">
+        <form method="POST" action="edit.php?recipe_id=<?= $_GET['recipe_id']?>" id="change-form">
 
           <p>
             <strong>Recipe Name: </strong>

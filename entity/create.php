@@ -12,6 +12,48 @@ $recipe = null;
 
 $title = 'Create a Recipe';
 
+$author = $_SESSION['name'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = $_POST['name'];
+  $category = $_POST['category'];
+  $image = $_POST['image'];
+  $prep_time_hours = $_POST['prep_time_hours'];
+  $prep_time_minutes = $_POST['prep_time_minutes'];
+  $cook_time_hours = $_POST['cook_time_hours'];
+  $cook_time_minutes = $_POST['cook_time_minutes'];
+  $servings = $_POST['servings'];
+  $ingredients = $_POST['ingredients'];
+  $steps = $_POST['steps'];
+
+  $total_time_hours = $prep_time_hours + $cook_time_hours;
+  $total_time_minutes = $prep_time_minutes + $cook_time_minutes;
+  if ($total_time_minutes >= 60) {
+    $total_time_hours++;
+    $total_time_minutes = $total_time_minutes % 60;
+  }
+
+  $new_recipe = [
+    'id' => count($recipes) + 2,
+    'name' => $name,
+    'author' => $author,
+    'category' => $category,
+    'image' => $image,
+    'prep_time_hours' => $prep_time_hours,
+    'prep_time_minutes' => $prep_time_minutes,
+    'cook_time_hours' => $cook_time_hours,
+    'cook_time_minutes' => $cook_time_minutes,
+    'total_time' => "{$total_time_hours} hours {$total_time_minutes} minutes",
+    'servings' => $servings,
+    'ingredients' => $ingredients,
+    'steps' => $steps,
+  ];
+
+  $recipes[] = $new_recipe;
+  $content = json_encode($recipes, JSON_PRETTY_PRINT);
+  file_put_contents('../data/recipes.json', $content);
+}
+
 // Uncomment for testing purposes:
 // echo '<pre>';
 // print_r($_POST);
@@ -54,7 +96,7 @@ $title = 'Create a Recipe';
 
           <p>
             <strong>Author: </strong>
-            <input type="text" class="form-control" name="author" id="m-authorName" disabled />
+            <input type="text" class="form-control" name="author" id="m-authorName" value="<?= $author ?>" disabled />
           </p>
 
           <p>
