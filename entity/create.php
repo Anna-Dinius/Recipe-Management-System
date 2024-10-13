@@ -28,11 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $total_time_hours = $prep_time_hours + $cook_time_hours;
   $total_time_minutes = $prep_time_minutes + $cook_time_minutes;
+
   if ($total_time_minutes >= 60) {
     $total_time_hours++;
     $total_time_minutes = $total_time_minutes % 60;
   }
-
 
   $id = count($recipes) + 1;
 
@@ -59,10 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   header("Location: ../entity/detail.php?recipe_id=$id");
 }
 
-// Uncomment for testing purposes:
-// echo '<pre>';
-// print_r($_POST);
-// echo '</pre>';
 ?>
 
 <!doctype html>
