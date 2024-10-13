@@ -132,6 +132,7 @@ function displayCards($recipes)
 
         <p class="author">Author: <?= $recipes[$i]['author'] ?></p>
       </a>
+
       <?php if (isset($_SESSION['signedIn'])) { ?>
         <div class="d-flex btns" id="btn-box-<?= $recipes[$i]['id'] ?>">
           <a href="../entity/delete.php?recipe_id=<?= $recipes[$i]['id'] ?>"
