@@ -242,7 +242,8 @@ function generateSteps($recipe)
   for ($i = 0; $i < count($recipe['steps']); $i++) {
     ?>
     <div class="d-flex">
-      <textarea class="form-control mb-3 step-input" id="step-<?= $i + 1 ?>"><?= $recipe['steps'][$i] ?></textarea>
+      <textarea class="form-control mb-3 step-input" name="steps[]"
+        id="step-<?= $i + 1 ?>"><?= $recipe['steps'][$i] ?></textarea>
       <button type="button" class="btn btn-danger del-input">X</button>
     </div>
     <?php
@@ -253,7 +254,7 @@ function generateIngredients($recipe)
   for ($i = 0; $i < count($recipe['ingredients']); $i++) {
     ?>
     <div class="d-flex">
-      <input class="form-control mb-3 ingredient-input" id="ingredient-<?= $i + 1 ?>"
+      <input class="form-control mb-3 ingredient-input" name="ingredients[]" id="ingredient-<?= $i + 1 ?>"
         value="<?= $recipe['ingredients'][$i] ?>" />
       <button type="button" class="btn btn-danger del-input">X</button>
     </div>

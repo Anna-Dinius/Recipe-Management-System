@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $cook_time_hours = $_POST['cook_time_hours'];
   $cook_time_minutes = $_POST['cook_time_minutes'];
   $servings = $_POST['servings'];
+
   if (isset($_POST['ingredients'])) {
     $ingredients = $_POST['ingredients'];
   }
@@ -32,12 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $total_time_hours = $prep_time_hours + $cook_time_hours;
   $total_time_minutes = $prep_time_minutes + $cook_time_minutes;
+
   if ($total_time_minutes >= 60) {
     $total_time_hours++;
     $total_time_minutes = $total_time_minutes % 60;
   }
 
-  for($i = 0; $i < count($recipes); $i++) {
+  for ($i = 0; $i < count($recipes); $i++) {
     if ($recipes[$i]['id'] == $id) {
       $recipes[$i]['name'] = $name;
       $recipes[$i]['category'] = $category;
@@ -47,11 +49,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $recipes[$i]['cook_time_hours'] = $cook_time_hours;
       $recipes[$i]['cook_time_minutes'] = $cook_time_minutes;
       $recipes[$i]['total_time'] = "{$total_time_hours} hours {$total_time_minutes} minutes";
-      if(isset($ingredients)) {
-        $recipes[$i]['ingredients'] = array_merge($recipes[$i]['ingredients'], $ingredients);
+      $recipes[$i]['servings'] = $servings;
+
+      if (isset($ingredients)) {
+        $recipes[$i]['ingredients'] = $ingredients;
       }
-      if(isset($steps)) {
-        $recipes[$i]['steps'] = array_merge($recipes[$i]['steps'], $steps);
+      if (isset($steps)) {
+        $recipes[$i]['steps'] = $steps;
       }
       break;
     }
@@ -93,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <br><br><br>
         </div>
 
-        <form method="POST" action="edit.php?recipe_id=<?= $_GET['recipe_id']?>" id="change-form">
+        <form method="POST" action="edit.php?recipe_id=<?= $_GET['recipe_id'] ?>" id="change-form">
 
           <p>
             <strong>Recipe Name: </strong>

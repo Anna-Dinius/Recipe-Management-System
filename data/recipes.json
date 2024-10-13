@@ -244,29 +244,30 @@
     },
     {
         "id": 11,
-        "name": "Pasta Aglio e Olio",
-        "category": "Entrees",
+        "name": "Pasta Aglio Olio",
+        "category": "Sides",
         "author": "Chef Marco",
-        "image": "https:\/\/chefjackovens.com\/wp-content\/uploads\/2020\/11\/My-Post-56-1.jpg",
-        "prep_time_hours": 0,
-        "prep_time_minutes": 10,
-        "cook_time_hours": 0,
-        "cook_time_minutes": 15,
-        "total_time": "25 minutes",
-        "servings": "2",
+        "image": "https:\/\/img.taste.com.au\/6zwlwQuA\/taste\/2016\/11\/aglio-e-olio-garlic-and-oil-87841-1.jpeg",
+        "prep_time_hours": "1",
+        "prep_time_minutes": "15",
+        "cook_time_hours": "5",
+        "cook_time_minutes": "0",
+        "total_time": "6 hours 15 minutes",
+        "servings": "8",
         "ingredients": [
             "200g spaghetti",
             "4 cloves garlic, thinly sliced",
             "1\/2 teaspoon red pepper flakes",
             "1\/4 cup olive oil",
             "Chopped fresh parsley for garnish",
-            "Grated Parmesan cheese"
+            "Grated Parmesan cheese",
+            "1\/4 cup parmesan cheese"
         ],
         "steps": [
             "Cook spaghetti according to package instructions. Reserve a cup of pasta water before draining.",
             "In a pan, saut\u00e9 thinly sliced garlic and red pepper flakes in olive oil until garlic is golden but not browned.",
             "Add cooked spaghetti to the pan, tossing to coat with the garlic-infused oil. If needed, add reserved pasta water to achieve desired consistency.",
-            "Garnish with chopped fresh parsley and serve with grated Parmesan cheese."
+            "Sprinkle with parmesan cheese."
         ]
     },
     {
