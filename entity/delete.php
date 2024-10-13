@@ -13,22 +13,14 @@ $recipe = getRecipe($recipes, $id);
 $title = 'Delete a Recipe';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // echo 'A';
   for ($i = 0; $i < count($recipes); $i++) {
-    // print_r($recipes[$i]['id']);
-    // echo ',';
-    // echo $id;
-    // echo '    ';
     if ($recipes[$i]['id'] == $id) {
-      // echo 'C';
       unset($recipes[$i]);
-      break;
+      file_put_contents('../data/recipes.json', json_encode($recipes, JSON_PRETTY_PRINT));
+      header('Location:../index.php');
+      exit();
     }
   }
-  // echo 'D';
-  $recipes = array_values($recipes);
-  $recipes = json_encode($recipes, JSON_PRETTY_PRINT);
-  file_put_contents($file, $recipes);
 
   header("Location: ../entity/index.php");
 }
