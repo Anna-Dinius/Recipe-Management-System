@@ -33,8 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $total_time_minutes = $total_time_minutes % 60;
   }
 
+
+  $id = count($recipes) + 1;
+
   $new_recipe = [
-    'id' => count($recipes) + 2,
+    'id' => $id,
     'name' => $name,
     'author' => $author,
     'category' => $category,
@@ -52,6 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $recipes[] = $new_recipe;
   $content = json_encode($recipes, JSON_PRETTY_PRINT);
   file_put_contents('../data/recipes.json', $content);
+
+  header("Location: ../entity/detail.php?recipe_id=$id");
 }
 
 // Uncomment for testing purposes:

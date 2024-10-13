@@ -13,22 +13,24 @@ $recipe = getRecipe($recipes, $id);
 $title = 'Delete a Recipe';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  echo 'A';
-  for($i = 0; $i < count($recipes); $i++) {
-    print_r($recipes[$i]['id']);
-    echo ',';
-    echo $id;
-    echo '    ';
+  // echo 'A';
+  for ($i = 0; $i < count($recipes); $i++) {
+    // print_r($recipes[$i]['id']);
+    // echo ',';
+    // echo $id;
+    // echo '    ';
     if ($recipes[$i]['id'] == $id) {
-      echo 'C';
+      // echo 'C';
       unset($recipes[$i]);
       break;
     }
   }
-  echo 'D';
+  // echo 'D';
   $recipes = array_values($recipes);
   $recipes = json_encode($recipes, JSON_PRETTY_PRINT);
   file_put_contents($file, $recipes);
+
+  header("Location: ../entity/index.php");
 }
 
 ?>
@@ -64,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>This action cannot be undone.</p>
 
         <div class="d-flex btns" id="btn-box-<?= $recipe['id'] ?>">
-          <form method="POST" action="delete.php?recipe_id=<?= $_GET['recipe_id']?>">
+          <form method="POST" action="delete.php?recipe_id=<?= $_GET['recipe_id'] ?>">
             <a href="index.php" class="btn btn-secondary update-btn">Cancel</a>
             <button type="submit" class="btn btn-sm btn-danger btn-delete">Delete</button>
           </form>
